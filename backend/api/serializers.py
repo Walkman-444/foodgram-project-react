@@ -4,17 +4,11 @@ from djoser.serializers import UserSerializer as UserHandleSerializer
 from rest_framework import serializers, validators
 from rest_framework.generics import get_object_or_404
 
-from .services import Base64ImageField
-from recipes.models import (
-    Ingredient,
-    IngredientInRecipe,
-    FavoriteRecipe,
-    RecipeList,
-    ShoppingCart,
-    Tag,
-)
+from recipes.models import (FavoriteRecipe, Ingredient, IngredientInRecipe,
+                            RecipeList, ShoppingCart, Tag)
 from users.models import Subscribe
 
+from .services import Base64ImageField
 
 User = get_user_model()
 

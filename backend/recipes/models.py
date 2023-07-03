@@ -132,12 +132,11 @@ class IngredientInRecipe(models.Model):
 
 
 class RecipeUserList(models.Model):
-    
+
     user = models.ForeignKey(User, on_delete=models.CASCADE,
                              verbose_name='Пользователь')
     recipe = models.ForeignKey(RecipeList, on_delete=models.CASCADE,
                                verbose_name='Рецепт')
-
 
     class Meta:
         abstract = True
