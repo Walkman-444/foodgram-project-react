@@ -14,6 +14,7 @@ User = get_user_model()
 
 MINIMUM_TIME_LIMIT = 1
 
+
 class UserSerializer(UserHandleSerializer):
     is_subscribed = serializers.SerializerMethodField()
 
