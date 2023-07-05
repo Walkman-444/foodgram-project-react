@@ -12,20 +12,17 @@ from .services import Base64ImageField
 
 User = get_user_model()
 
+MINIMUM_TIME_LIMIT = 1
 
 class UserSerializer(UserHandleSerializer):
     is_subscribed = serializers.SerializerMethodField()
 
     class Meta:
         model = User
-        fields = ('id', 'email', 'username',
-                  'first_name', 'last_name',
-                  'is_subscribed')
+        fields = '__all__'
 
     def get_is_subscribed(self, obj):
         user = self.context.get('request').user
-        if user.is_anonymous:
-            return False
         return Subscribe.objects.filter(
             user=user, author=obj.id).exists()
 
@@ -99,11 +96,6 @@ class FavoriteOrSubscribeSerializer(serializers.ModelSerializer):
 
 
 class SubscribeSerializer(serializers.ModelSerializer):
-    id = serializers.IntegerField(source='author.id')
-    email = serializers.EmailField(source='author.email')
-    username = serializers.CharField(source='author.username')
-    first_name = serializers.CharField(source='author.first_name')
-    last_name = serializers.CharField(source='author.last_name')
     is_subscribed = serializers.SerializerMethodField()
     recipes = serializers.SerializerMethodField()
     recipes_count = serializers.SerializerMethodField(read_only=True)
@@ -241,7 +233,7 @@ class RecipeSerializer(serializers.ModelSerializer):
         if len(tags) > len(set(tags)):
             errors.append('Дважды один и тот же тэг использовать нельзя.')
         cooking_time = float(data.get('cooking_time'))
-        if cooking_time < 1:
+        if cooking_time < MINIMUM_TIME_LIMIT:
             errors.append(
                 'Время приготовления должно быть не меньше 1 минуты.')
         if errors:

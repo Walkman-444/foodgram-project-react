@@ -12,13 +12,13 @@ from recipes.models import (FavoriteRecipe, Ingredient, RecipeList,
                             ShoppingCart, Tag)
 from users.models import Subscribe
 
-from .filters import IngredientFilter, RecipeFilter
-from .pagination import LimitPageNumberPagination
-from .permissions import IsAdminOrReadOnly, IsOwnerOrReadOnly
-from .serializers import (FavoriteOrSubscribeSerializer, IngredientSerializer,
+from api.filters import IngredientFilter, RecipeFilter
+from api.pagination import LimitPageNumberPagination
+from api.permissions import IsAdminOrReadOnly, IsOwnerOrReadOnly
+from api.serializers import (FavoriteOrSubscribeSerializer, IngredientSerializer,
                           RecipeSerializer, SubscribeSerializer, TagSerializer,
                           UserPasswordSerializer, UserSerializer)
-from .services import collect_shopping_cart
+from api.services import collect_shopping_cart
 
 User = get_user_model()
 
