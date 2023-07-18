@@ -131,20 +131,23 @@ class IngredientInRecipe(models.Model):
         ]
 
 
-class RecipeUserList(models.Model):
 
-    user = models.ForeignKey(User, on_delete=models.CASCADE,
-                             verbose_name='Пользователь')
-    recipe = models.ForeignKey(RecipeList, on_delete=models.CASCADE,
-                               verbose_name='Рецепт')
+class FavoriteRecipe(models.Model):
+
+    user = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name='favorites',
+        verbose_name='Пользователь',
+    )
+    recipe = models.ForeignKey(
+        RecipeList,
+        on_delete=models.CASCADE,
+        related_name='favorites',
+        verbose_name='Рецепт',
+    )
 
     class Meta:
-        abstract = True
-        ordering = ('user', 'recipe')
-
-
-class FavoriteRecipe(RecipeUserList):
-    class Meta(RecipeUserList.Meta):
         verbose_name = 'Избранное'
         verbose_name_plural = 'Избранные'
         ordering = ['-id']
@@ -160,8 +163,21 @@ class FavoriteRecipe(RecipeUserList):
                 f'добавил {self.recipe.name} в избранное.')
 
 
-class ShoppingCart(RecipeUserList):
-    class Meta(RecipeUserList.Meta):
+class ShoppingCart(models.Model):
+
+    user = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name='shopping_cart',
+        verbose_name='В корзине у пользователя'
+    )
+    recipe = models.ForeignKey(
+        RecipeList,
+        on_delete=models.CASCADE,
+        related_name='shopping_cart',
+        verbose_name='Рецепт в корзине у пользователя'
+    )
+    class Meta:
         verbose_name = 'Покупка'
         verbose_name_plural = 'Покупки'
         constraints = [
