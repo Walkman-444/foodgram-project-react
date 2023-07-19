@@ -17,7 +17,7 @@ services:
 
   backend:
     container_name: backend
-    build: ../backend/
+    image: walkman444/foodgram_backend
     env_file: ../.env
     volumes:
       - static:/app/static/
@@ -28,9 +28,7 @@ services:
 
   frontend:
     container_name: frontend
-    build:
-      context: ../frontend
-      dockerfile: Dockerfile
+    image: walkman444/foodgram_frontend
     volumes:
       - ../frontend/:/app/result_build/
     depends_on:
