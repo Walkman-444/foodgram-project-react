@@ -2,9 +2,8 @@ import base64
 
 from django.core.files.base import ContentFile
 from django.http import HttpResponse
-from rest_framework import serializers
-
 from recipes.models import ShoppingCart
+from rest_framework import serializers
 
 
 class Base64ImageField(serializers.ImageField):

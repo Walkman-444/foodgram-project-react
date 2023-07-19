@@ -131,7 +131,6 @@ class IngredientInRecipe(models.Model):
         ]
 
 
-
 class FavoriteRecipe(models.Model):
 
     user = models.ForeignKey(
@@ -177,6 +176,7 @@ class ShoppingCart(models.Model):
         related_name='shopping_cart',
         verbose_name='Рецепт в корзине у пользователя'
     )
+
     class Meta:
         verbose_name = 'Покупка'
         verbose_name_plural = 'Покупки'

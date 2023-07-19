@@ -3,7 +3,6 @@ import json
 
 from django.conf import settings
 from django.core.management import BaseCommand
-
 from recipes.models import Ingredient
 
 FILE: str = f'{settings.BASE_DIR}/data/ingredients.json'
