@@ -7,6 +7,7 @@ IP: 51.250.20.116 Hostname: sprint14.zapto.org
 Проект реализован на `Django` и `DjangoRestFramework`. Доступ к данным реализован через API-интерфейс. Документация к API написана с использованием `Redoc`.
 
 
+
 ## **Описание проекта**
 
 Проект FOODGRAM находится по адресу: sprint14.zapto.org
